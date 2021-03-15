@@ -35,11 +35,11 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (RentalCarContext context = new RentalCarContext())
             {
-                return filter == null ? context.Set<Color>().ToList() : context.Set<Car>().Where(filter).ToList();
+                return filter == null ? context.Set<Color>().ToList() : context.Set<Color>().Where(filter).ToList();
             }
         }
 
-        public Color GetById(Expression<Func<Color, bool>> filter)
+        public Color Get(Expression<Func<Color, bool>> filter)
         {
             using (RentalCarContext context = new RentalCarContext())
             {

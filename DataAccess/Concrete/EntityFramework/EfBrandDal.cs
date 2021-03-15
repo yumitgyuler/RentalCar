@@ -39,7 +39,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public Brand GetById(Expression<Func<Brand, bool>> filter)
+        public Brand Get(Expression<Func<Brand, bool>> filter)
         {
             using (RentalCarContext context = new RentalCarContext())
             {

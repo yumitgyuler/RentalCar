@@ -7,7 +7,7 @@ namespace Business.Abstract
 {
     public interface IEntityService<T> where T:class,IEntity,new()
     {
-        T GetById(int id);
+        T Get(int id);
         List<T> GetAll();
         void Add(T car);
         void Update(T car);
