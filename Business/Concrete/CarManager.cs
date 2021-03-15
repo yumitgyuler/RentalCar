@@ -18,12 +18,16 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            throw new NotImplementedException();
+            if (car.LicancePlate.Length > 2 || car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            Console.WriteLine("Licanse Plate must be more then 2 characters or daily price must be more than 0");
         }
 
         public void Delete(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Delete(car);
         }
 
         public List<Car> GetAll()
@@ -33,12 +37,20 @@ namespace Business.Concrete
 
         public Car GetById(int id)
         {
-            throw new NotImplementedException();
+            return _carDal.GetById(p => p.Id == id);
         }
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Update(car);
+        }
+        public Car GetCarsByBrandId(int id)
+        {
+            return _carDal.GetById(p => p.BrandId == id);
+        }
+        public Car GetCarsByColordId(int id)
+        {
+            return _carDal.GetById(p => p.ColorId == id);
         }
     }
 }
