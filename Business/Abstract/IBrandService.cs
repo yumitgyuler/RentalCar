@@ -5,7 +5,12 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IBrandService: IEntityService<Brand>
+    public interface IBrandService
     {
+        Brand Get(int id);
+        List<Brand> GetAll();
+        void Add(Brand brand);
+        void Update(Brand brand);
+        void Delete(Brand brand);
     }
 }
