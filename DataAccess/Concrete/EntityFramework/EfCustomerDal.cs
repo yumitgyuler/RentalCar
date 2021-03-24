@@ -10,7 +10,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EFCustomerDal : EfEntityRepositoryBase<Customer, RentalCarContext>, ICustomerDal
+    public class EfCustomerDal : EfEntityRepositoryBase<Customer, RentalCarContext>, ICustomerDal
     {
     }
 }
