@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,19 +12,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CarImagesController : ControllerBase
     {
-        ICustomerService _customerService;
+        ICarImageService _carImageService;
 
-        public CustomerController(ICustomerService customerService)
+        public CarImagesController(ICarImageService carImageService)
         {
-            _customerService = customerService;
+            _carImageService = carImageService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _customerService.GetAll();
+            var result = _carImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -34,7 +35,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _customerService.Get(id);
+            var result = _carImageService.Get(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,9 +43,14 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(Customer customer)
+        public async Task<IActionResult> AddAsync([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _customerService.Add(customer);
+            var path = Path.GetTempFileName();
+            if (file.Length > 0)
+                using (var stream = new FileStream(path, FileMode.Create)) await file.CopyToAsync(stream);
+            var newCarImage = new CarImage { CarId = carImage.CarId, ImagePath = path, Date = DateTime.Now };
+            var result = _carImageService.Add(newCarImage);
+
             if (result.Success)
             {
                 return Ok(result);

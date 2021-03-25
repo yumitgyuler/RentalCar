@@ -33,33 +33,19 @@ namespace Business.Concrete
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
-
-        private IResult CheckIfLicancePlateExist(Car car)
-        {
-            var result = _carDal.GetAll(c => c.LicancePlate == car.LicancePlate).Any();
-            if (result)
-            {
-                return new ErrorResult(Messages.LicancePlateExxistError);
-            }
-            return new SuccessResult();
-        }
-
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
-
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
-
         public IDataResult<Car> Get(int id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == id));
         }
-
         public IResult Update(Car car)
         {
             _carDal.Update(car);
@@ -73,10 +59,21 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(p => p.ColorId == id));
         }
-
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
+
+        //Business Rules
+        private IResult CheckIfLicancePlateExist(Car car)
+        {
+            var result = _carDal.GetAll(c => c.LicancePlate == car.LicancePlate).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.LicancePlateExxistError);
+            }
+            return new SuccessResult();
+        }
+
     }
 }

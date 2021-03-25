@@ -15,7 +15,7 @@ namespace Business.Constants
         public static string ColorAdded = "Color registration is successful";
         public static string ColorUpdated = "Color update process is successful";
         public static string ColorDeleted = "Color deletion successful";
-        public static string ColorAddError = "The color you want to add already exists. Enter a different brand.";
+        public static string ColorAddError = "The color you want to add already exists. Enter a different color.";
 
 
         public static string CarAdded = "Car registration is successful";
@@ -23,6 +23,11 @@ namespace Business.Constants
         public static string CarUpdated = "Car update process is successful";
         public static string CarAddError = "Licanse plate must be more then 2 characters";
         public static string LicancePlateExxistError = "This lisance plate exist already on the system.";
+
+        public static string CarImageAdded = "Image added";
+        public static string CarImageUpdated = "Image update process is successful";
+        public static string CarImageDeleted = "Image deletion successful";
+        internal static string ImageCountError = "This car have already 5 images.";
 
         public static string UserAdded = "User registration is successful";
         public static string UserUpdated = "User update process is successful";
