@@ -2,12 +2,14 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -23,8 +25,23 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+            IResult result = BusinessRules.Run(CheckIfLicancePlateExist(car));
+            if (result != null)
+            {
+                return result;
+            }
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
+        }
+
+        private IResult CheckIfLicancePlateExist(Car car)
+        {
+            var result = _carDal.GetAll(c => c.LicancePlate == car.LicancePlate).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.LicancePlateExxistError);
+            }
+            return new SuccessResult();
         }
 
         public IResult Delete(Car car)

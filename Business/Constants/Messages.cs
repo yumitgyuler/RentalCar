@@ -22,7 +22,7 @@ namespace Business.Constants
         public static string CarDeleted = "Car deletion successful";
         public static string CarUpdated = "Car update process is successful";
         public static string CarAddError = "Licanse plate must be more then 2 characters";
-
+        public static string LicancePlateExxistError = "This lisance plate exist already on the system.";
 
         public static string UserAdded = "User registration is successful";
         public static string UserUpdated = "User update process is successful";
@@ -39,6 +39,6 @@ namespace Business.Constants
         public static string RentalUpdated = "Car rental process has been updated.";
         public static string RentalFailedAddOrUpdate = "You cannot rent this car as it has not yet been delivered.";
         public static string RentalReturned = "The vehicle you rented has been delivered.";
-
+        
     }
 }
